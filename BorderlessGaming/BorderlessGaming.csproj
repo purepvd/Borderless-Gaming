@@ -231,6 +231,6 @@ rem call signtool sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>copy $(SolutionDir)SteamLibs\* $(ProjectDir)$(OutDir)
-xcopy /Y $(SolutionDir)Languages\*.* $(ProjectDir)$(OutDir)AppData\Languages\*.*</PreBuildEvent>
+xcopy /Y "$(SolutionDir)Languages\*.*" "$(ProjectDir)$(OutDir)AppData\Languages\*.*"</PreBuildEvent>
   </PropertyGroup>
 </Project>
