@@ -11,8 +11,6 @@ using BorderlessGaming.Logic.Models;
 using BorderlessGaming.Logic.Properties;
 using BorderlessGaming.Logic.Steam;
 using BorderlessGaming.Logic.System.Utilities;
-using Ionic.Zip;
-
 
 namespace BorderlessGaming.Logic.System
 {
@@ -23,6 +21,7 @@ namespace BorderlessGaming.Logic.System
             // There is no way you can reliably check if there is an internet connection, but we can come close
             get
             {
+                return false;
                 var result = false;
 
                 try
@@ -102,14 +101,6 @@ namespace BorderlessGaming.Logic.System
             catch
             {
                 // ignored
-            }
-        }
-
-        public static void ExtractZipFile(string archiveFilenameIn, string password, string outFolder)
-        {
-            using (var zip = ZipFile.Read(archiveFilenameIn))
-            {
-                zip.ExtractAll(outFolder, ExtractExistingFileAction.OverwriteSilently);
             }
         }
 
