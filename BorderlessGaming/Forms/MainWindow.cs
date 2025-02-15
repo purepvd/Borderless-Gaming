@@ -229,10 +229,6 @@ namespace BorderlessGaming.Forms
             lstProcesses.Items.Clear();
             await _watcher.Refresh();
         }
-        private void rainwayToolStrip_Click(object sender, EventArgs e)
-        {
-            Tools.GotoSite("https://rainway.io/?ref=borderlessgaming");
-        }
 
         private void usageGuideToolStripMenuItem_Click(object sender, EventArgs e)
         {

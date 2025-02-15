@@ -20,54 +20,57 @@ namespace BorderlessGaming.Logic.System
         {
             get
             {
-                var versionInfo = FileVersionInfo.GetVersionInfo(Path);
-                var userAppData = GetUserAppDataPath();
-                try
-                {
-                    // No version!
-                    return Environment.GetEnvironmentVariable("AppData").Trim() + "\\" + versionInfo.CompanyName +
-                           "\\" + versionInfo.ProductName;
-                }
-                catch
-                {
-                }
-
-                try
-                {
-                    // Version, but chopped out
-                    return userAppData.Substring(0, userAppData.LastIndexOf("\\"));
-                }
-                catch
-                {
-                    try
-                    {
-                        // App launch folder
-                        var directoryInfo = new FileInfo(Path).Directory;
-                        var dir = directoryInfo.ToString();
-                        return Path.Substring(0, dir.LastIndexOf("\\", StringComparison.Ordinal));
-                    }
-                    catch
-                    {
-                        try
-                        {
-                            // Current working folder
-                            return Environment.CurrentDirectory;
-                        }
-                        catch
-                        {
-                            try
-                            {
-                                // Desktop
-                                return Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-                            }
-                            catch
-                            {
-                                // Also current working folder
-                                return ".";
-                            }
-                        }
-                    }
-                }
+                var currentExecutingPath = Directory.GetCurrentDirectory();
+                var dataPath = global::System.IO.Path.Combine(currentExecutingPath, "AppData");
+                return dataPath;
+                // var versionInfo = FileVersionInfo.GetVersionInfo(Path);
+                // var userAppData = GetUserAppDataPath();
+                // try
+                // {
+                //     // No version!
+                //     return Environment.GetEnvironmentVariable("AppData").Trim() + "\\" + versionInfo.CompanyName +
+                //            "\\" + versionInfo.ProductName;
+                // }
+                // catch
+                // {
+                // }
+                //
+                // try
+                // {
+                //     // Version, but chopped out
+                //     return userAppData.Substring(0, userAppData.LastIndexOf("\\"));
+                // }
+                // catch
+                // {
+                //     try
+                //     {
+                //         // App launch folder
+                //         var directoryInfo = new FileInfo(Path).Directory;
+                //         var dir = directoryInfo.ToString();
+                //         return Path.Substring(0, dir.LastIndexOf("\\", StringComparison.Ordinal));
+                //     }
+                //     catch
+                //     {
+                //         try
+                //         {
+                //             // Current working folder
+                //             return Environment.CurrentDirectory;
+                //         }
+                //         catch
+                //         {
+                //             try
+                //             {
+                //                 // Desktop
+                //                 return Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                //             }
+                //             catch
+                //             {
+                //                 // Also current working folder
+                //                 return ".";
+                //             }
+                //         }
+                //     }
+                // }
             }
         }
 

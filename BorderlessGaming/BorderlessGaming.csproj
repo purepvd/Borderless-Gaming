@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>BorderlessGaming</RootNamespace>
     <AssemblyName>BorderlessGaming</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <PublishUrl>publish\</PublishUrl>
@@ -97,12 +97,6 @@
     <Compile Include="Forms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Rainway.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Rainway.Designer.cs">
-      <DependentUpon>Rainway.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AboutForm.de.resx">
@@ -148,17 +142,11 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Rainway.resx">
-      <DependentUpon>Rainway.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="..\BGKey.pfx">
-      <Link>BGKey.pfx</Link>
-    </None>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -222,7 +210,6 @@
   <ItemGroup>
     <Content Include="BorderlessGaming_new.ico" />
     <EmbeddedResource Include="Resources\master-glyph.png" />
-    <None Include="Resources\RainwayLogo.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="PostBuildMacros">
@@ -238,11 +225,12 @@
       $(PostBuildEventDependsOn);
       PostBuildMacros;
     </PostBuildEventDependsOn>
-    <PostBuildEvent>call signtool sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /as /sha1 3BD5BE571287FE2052F137C44198AE7BAB38B037 "$(ProjectDir)$(OutDir)$(TargetFileName)"
-call iscc /Qp "$(SolutionDir)\Installers\BorderlessGaming_Standalone_Admin.iss"
-call signtool sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /as /sha1 3BD5BE571287FE2052F137C44198AE7BAB38B037 "$(SolutionDir)Installers\BorderlessGaming@(VersionNumber)_admin_setup.exe"</PostBuildEvent>
+    <PostBuildEvent>rem call signtool sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /as /sha1 3BD5BE571287FE2052F137C44198AE7BAB38B037 "$(ProjectDir)$(OutDir)$(TargetFileName)"
+rem call iscc /Qp "$(SolutionDir)\Installers\BorderlessGaming_Standalone_Admin.iss"
+rem call signtool sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /as /sha1 3BD5BE571287FE2052F137C44198AE7BAB38B037 "$(SolutionDir)Installers\BorderlessGaming@(VersionNumber)_admin_setup.exe"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>copy $(SolutionDir)SteamLibs\* $(ProjectDir)$(OutDir)</PreBuildEvent>
+    <PreBuildEvent>copy $(SolutionDir)SteamLibs\* $(ProjectDir)$(OutDir)
+xcopy /Y $(SolutionDir)Languages\*.* $(ProjectDir)$(OutDir)AppData\Languages\*.*</PreBuildEvent>
   </PropertyGroup>
 </Project>
